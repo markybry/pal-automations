@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",       // modern JS features
+    "module": "none",         // very important for Apps Script
+    "outDir": "./dist",       // compiled JS goes here
+    "rootDir": "./src",
+    "strict": false,
+    "noImplicitAny": false,      // Allow implicit 'any'
+    "types": ["google-apps-script"],
+    "lib": ["es2017"]          // remove "dom"
+  },
+  "include": ["src/**/*.ts", "src/AppService.gs"],
+  "exclude": ["src/AppService.gs"]
+}
