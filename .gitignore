@@ -1,3 +1,4 @@
 StaffForms/output/
 node_modules/
 dist/
+__pycache__/
