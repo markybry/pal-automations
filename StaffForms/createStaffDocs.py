@@ -72,10 +72,15 @@ def get_existing_month_folders(house_dir: str) -> set:
     if os.path.isdir(house_dir):
         for name in os.listdir(house_dir):
             try:
-                dt = datetime.strptime(name, "%B %Y")
+                # Support both "MM Month YYYY" (new) and "Month YYYY" (old) formats
+                dt = datetime.strptime(name, "%m %B %Y")
                 existing.add((dt.year, dt.month))
             except ValueError:
-                pass
+                try:
+                    dt = datetime.strptime(name, "%B %Y")
+                    existing.add((dt.year, dt.month))
+                except ValueError:
+                    pass
     return existing
 
 
@@ -232,7 +237,7 @@ def main():
 
         cur_year, cur_month = start_year, start_month
         for _ in range(args.months):
-            month_label = datetime(cur_year, cur_month, 1).strftime("%B %Y")
+            month_label = datetime(cur_year, cur_month, 1).strftime("%m %B %Y")
             month_display = datetime(cur_year, cur_month, 1).strftime("%B")
             month_dir = os.path.join(house_dir, month_label)
 
